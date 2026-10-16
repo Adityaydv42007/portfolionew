@@ -18,7 +18,7 @@ export const PERSONAL_INFO = {
   phone: "+91 9956237287",
   location: "Kanpur, Uttar Pradesh, India",
   linkedin: "https://linkedin.com/in/adityayadav42007",
-  resumePath: "/resume.pdf",
+  resumePath: `${import.meta.env.BASE_URL}resume.pdf`,
   focusAreas: [
     "Business Administration",
     "Digital Marketing",
