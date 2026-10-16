@@ -4,6 +4,7 @@
  */
 
 import React, { useState } from 'react';
+import { PhotoProvider } from './context/PhotoContext';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -22,32 +23,34 @@ export default function App() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-sky-500/25 selection:text-sky-200">
-      {/* Sticky Top Navigation */}
-      <Navbar onOpenResume={() => setIsResumeOpen(true)} />
+    <PhotoProvider>
+      <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-sky-500/25 selection:text-sky-200">
+        {/* Sticky Top Navigation */}
+        <Navbar onOpenResume={() => setIsResumeOpen(true)} />
 
-      {/* Main Content Sections */}
-      <main className="flex-1">
-        <Hero onOpenResume={() => setIsResumeOpen(true)} />
-        <About />
-        <Skills />
-        <Education />
-        <Certifications />
-        <IndustrialExposure />
-        <Workshops />
-        <Projects />
-        <CareerInterests />
-        <Contact />
-      </main>
+        {/* Main Content Sections */}
+        <main className="flex-1">
+          <Hero onOpenResume={() => setIsResumeOpen(true)} />
+          <About />
+          <Skills />
+          <Education />
+          <Certifications />
+          <IndustrialExposure />
+          <Workshops />
+          <Projects />
+          <CareerInterests />
+          <Contact />
+        </main>
 
-      {/* Footer */}
-      <Footer onOpenResume={() => setIsResumeOpen(true)} />
+        {/* Footer */}
+        <Footer onOpenResume={() => setIsResumeOpen(true)} />
 
-      {/* Interactive In-App Resume ATS Viewer & Download Modal */}
-      <ResumeModal
-        isOpen={isResumeOpen}
-        onClose={() => setIsResumeOpen(false)}
-      />
-    </div>
+        {/* Interactive In-App Resume ATS Viewer & Download Modal */}
+        <ResumeModal
+          isOpen={isResumeOpen}
+          onClose={() => setIsResumeOpen(false)}
+        />
+      </div>
+    </PhotoProvider>
   );
 }

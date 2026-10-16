@@ -1,7 +1,7 @@
 import React from 'react';
 import { PERSONAL_INFO, EDUCATION_LIST, CERTIFICATIONS_LIST, INDUSTRIAL_EXPOSURE, WORKSHOPS_LIST, SKILL_CATEGORIES } from '../data/portfolioData';
+import { useProfilePhoto } from '../context/PhotoContext';
 import { X, Download, Printer, ExternalLink, Mail, Phone, MapPin, CheckCircle } from 'lucide-react';
-import profilePhoto from '../assets/images/aditya_profile.jpg';
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -9,6 +9,7 @@ interface ResumeModalProps {
 }
 
 export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
+  const { photoUrl } = useProfilePhoto();
   if (!isOpen) return null;
 
   const handlePrint = () => {
@@ -66,7 +67,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
               <div className="w-16 h-16 rounded-xl overflow-hidden border border-slate-700 shrink-0 bg-slate-900 shadow-sm">
                 <img
-                  src={profilePhoto}
+                  src={photoUrl}
                   alt={PERSONAL_INFO.name}
                   className="w-full h-full object-cover object-top"
                   onError={(e) => {

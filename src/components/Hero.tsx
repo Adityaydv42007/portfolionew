@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { PERSONAL_INFO } from '../data/portfolioData';
-import profilePhoto from '../assets/images/aditya_profile.jpg';
+import { useProfilePhoto } from '../context/PhotoContext';
 import { 
   ArrowRight, 
   Download, 
@@ -11,7 +11,9 @@ import {
   Target, 
   Compass, 
   CheckCircle2,
-  ExternalLink
+  ExternalLink,
+  Camera,
+  RotateCcw
 } from 'lucide-react';
 
 interface HeroProps {
@@ -19,6 +21,22 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
+  const { photoUrl, setCustomPhoto, resetPhoto, isCustom } = useProfilePhoto();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (typeof reader.result === 'string') {
+          setCustomPhoto(reader.result);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
@@ -122,19 +140,46 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
               <div className="w-full rounded-[22px] bg-slate-950/90 border border-slate-800/80 backdrop-blur-xl relative overflow-hidden flex flex-col">
                 
                 {/* Photo frame with graceful gradient lighting */}
-                <div className="relative aspect-[3/4] w-full overflow-hidden bg-slate-900">
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-slate-900 group">
                   <img
-                    src={profilePhoto}
+                    src={photoUrl}
                     alt="Aditya Yadav - BBA Student, Allenhouse Business School"
-                    className="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-105"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     onError={(e) => {
-                      // Fallback to public profile if needed
                       (e.target as HTMLImageElement).src = `${import.meta.env.BASE_URL}profile.jpg`;
                     }}
                   />
 
                   {/* Gradient Scrim for Contrast */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-90" />
+
+                  {/* Top-right Photo Action (Upload your exact photo) */}
+                  <div className="absolute top-3 right-3 z-30 flex items-center gap-1.5">
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept="image/*"
+                      onChange={handlePhotoUpload}
+                      className="hidden"
+                    />
+                    <button
+                      onClick={() => fileInputRef.current?.click()}
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold text-slate-200 bg-slate-950/80 hover:bg-slate-900 border border-slate-700/80 hover:border-sky-400 rounded-lg backdrop-blur-md transition-all shadow-md cursor-pointer"
+                      title="Upload your exact original photo.jpeg file"
+                    >
+                      <Camera className="w-3.5 h-3.5 text-sky-400" />
+                      <span>{isCustom ? 'Change Photo' : 'Upload photo.jpeg'}</span>
+                    </button>
+                    {isCustom && (
+                      <button
+                        onClick={resetPhoto}
+                        className="p-1 text-slate-400 hover:text-white bg-slate-950/80 hover:bg-slate-900 border border-slate-700/80 rounded-lg transition-colors cursor-pointer"
+                        title="Reset to default photo"
+                      >
+                        <RotateCcw className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
 
                   {/* Bottom Nameplate Overlay */}
                   <div className="absolute bottom-0 left-0 right-0 p-5 z-10 flex flex-col">

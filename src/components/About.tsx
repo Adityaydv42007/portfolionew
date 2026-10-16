@@ -1,9 +1,10 @@
 import React from 'react';
 import { ABOUT_CARDS, PERSONAL_INFO } from '../data/portfolioData';
+import { useProfilePhoto } from '../context/PhotoContext';
 import { GraduationCap, Compass, Wrench, Target, CheckCircle2, ArrowRight } from 'lucide-react';
-import profilePhoto from '../assets/images/aditya_profile.jpg';
 
 export const About: React.FC = () => {
+  const { photoUrl } = useProfilePhoto();
   const cardIcons = [
     GraduationCap,
     Compass,
@@ -72,7 +73,7 @@ export const About: React.FC = () => {
             <div className="flex items-center gap-4 mb-5 pb-5 border-b border-slate-800/80">
               <div className="w-14 h-14 rounded-xl overflow-hidden border border-slate-700 shrink-0 bg-slate-900 shadow-md">
                 <img
-                  src={profilePhoto}
+                  src={photoUrl}
                   alt={PERSONAL_INFO.name}
                   className="w-full h-full object-cover object-top"
                   onError={(e) => {
