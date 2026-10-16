@@ -1,6 +1,7 @@
 import React from 'react';
 import { ABOUT_CARDS, PERSONAL_INFO } from '../data/portfolioData';
 import { GraduationCap, Compass, Wrench, Target, CheckCircle2, ArrowRight } from 'lucide-react';
+import profilePhoto from '../assets/images/aditya_profile.jpg';
 
 export const About: React.FC = () => {
   const cardIcons = [
@@ -68,9 +69,33 @@ export const About: React.FC = () => {
 
           {/* Quick Context Summary Box */}
           <div className="lg:col-span-5 bg-slate-950/80 border border-slate-800 rounded-2xl p-6 sm:p-7 shadow-xl">
-            <h3 className="text-base font-bold text-white mb-4 tracking-tight flex items-center justify-between">
+            <div className="flex items-center gap-4 mb-5 pb-5 border-b border-slate-800/80">
+              <div className="w-14 h-14 rounded-xl overflow-hidden border border-slate-700 shrink-0 bg-slate-900 shadow-md">
+                <img
+                  src={profilePhoto}
+                  alt={PERSONAL_INFO.name}
+                  className="w-full h-full object-cover object-top"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = `${import.meta.env.BASE_URL}profile.jpg`;
+                  }}
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-base font-bold text-white tracking-tight">
+                  {PERSONAL_INFO.name}
+                </span>
+                <span className="text-xs text-sky-400 font-medium">
+                  BBA '28 · Allenhouse Business School
+                </span>
+                <span className="text-[11px] text-slate-400">
+                  Kanpur, Uttar Pradesh
+                </span>
+              </div>
+            </div>
+
+            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4 flex items-center justify-between">
               <span>Candidate Snapshot</span>
-              <span className="text-xs font-mono text-sky-400">Allenhouse '28</span>
+              <span className="text-xs font-mono text-emerald-400">Verified Records</span>
             </h3>
 
             <dl className="space-y-4 text-sm">

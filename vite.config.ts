@@ -6,10 +6,11 @@ import {defineConfig} from 'vite';
 export default defineConfig(() => {
   return {
     plugins: [react(), tailwindcss()],
-    base: './',
+    // Relative base ensures assets load on GitHub Pages subpaths and custom domains
+    base: process.env.VITE_BASE || './',
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '.'),
+        '@': path.resolve('.'),
       },
     },
     server: {

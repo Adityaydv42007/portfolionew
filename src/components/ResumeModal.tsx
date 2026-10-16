@@ -1,6 +1,7 @@
 import React from 'react';
 import { PERSONAL_INFO, EDUCATION_LIST, CERTIFICATIONS_LIST, INDUSTRIAL_EXPOSURE, WORKSHOPS_LIST, SKILL_CATEGORIES } from '../data/portfolioData';
 import { X, Download, Printer, ExternalLink, Mail, Phone, MapPin, CheckCircle } from 'lucide-react';
+import profilePhoto from '../assets/images/aditya_profile.jpg';
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -61,17 +62,29 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
         <div className="overflow-y-auto p-6 sm:p-10 bg-slate-950 text-slate-100 space-y-7 text-sm font-sans">
           
           {/* Header */}
-          <div className="border-b border-slate-800 pb-6 text-center sm:text-left sm:flex sm:justify-between sm:items-end">
-            <div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-white uppercase">
-                {PERSONAL_INFO.name}
-              </h1>
-              <p className="text-sm font-semibold text-sky-400 mt-1">
-                BBA Student · Business Administration, Marketing & Finance
-              </p>
-              <p className="text-xs text-slate-400 mt-0.5">
-                Allenhouse Business School
-              </p>
+          <div className="border-b border-slate-800 pb-6 text-center sm:text-left sm:flex sm:justify-between sm:items-center gap-6">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+              <div className="w-16 h-16 rounded-xl overflow-hidden border border-slate-700 shrink-0 bg-slate-900 shadow-sm">
+                <img
+                  src={profilePhoto}
+                  alt={PERSONAL_INFO.name}
+                  className="w-full h-full object-cover object-top"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = `${import.meta.env.BASE_URL}profile.jpg`;
+                  }}
+                />
+              </div>
+              <div>
+                <h1 className="text-3xl font-extrabold tracking-tight text-white uppercase">
+                  {PERSONAL_INFO.name}
+                </h1>
+                <p className="text-sm font-semibold text-sky-400 mt-0.5">
+                  BBA Student · Business Administration, Marketing & Finance
+                </p>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Allenhouse Business School
+                </p>
+              </div>
             </div>
 
             <div className="mt-4 sm:mt-0 text-xs text-slate-400 space-y-1 sm:text-right">

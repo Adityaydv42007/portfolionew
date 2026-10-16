@@ -1,5 +1,6 @@
 import React from 'react';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import profilePhoto from '../assets/images/aditya_profile.jpg';
 import { 
   ArrowRight, 
   Download, 
@@ -112,62 +113,69 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
 
           </div>
 
-          {/* Right Column: Initials-Based Visual Composition */}
+          {/* Right Column: Professional Portrait & Visual Composition */}
           <div className="lg:col-span-5 relative flex items-center justify-center">
             
             {/* Ambient geometric frame */}
-            <div className="relative w-full max-w-[420px] aspect-square rounded-3xl p-1 bg-gradient-to-b from-slate-700/60 via-slate-800/40 to-slate-900/80 shadow-2xl shadow-black/60">
+            <div className="relative w-full max-w-[390px] rounded-3xl p-1 bg-gradient-to-b from-sky-500/20 via-slate-800/40 to-slate-900/80 shadow-2xl shadow-black/80">
               
-              <div className="w-full h-full rounded-[22px] bg-slate-950/90 border border-slate-800/80 backdrop-blur-xl relative overflow-hidden flex flex-col items-center justify-center p-8">
+              <div className="w-full rounded-[22px] bg-slate-950/90 border border-slate-800/80 backdrop-blur-xl relative overflow-hidden flex flex-col">
                 
-                {/* Subtle background circuit/grid pattern */}
-                <div 
-                  className="absolute inset-0 opacity-15"
-                  style={{
-                    backgroundImage: `radial-gradient(circle at 1px 1px, rgba(56, 189, 248, 0.4) 1px, transparent 0)`,
-                    backgroundSize: '24px 24px'
-                  }}
-                />
+                {/* Photo frame with graceful gradient lighting */}
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-slate-900">
+                  <img
+                    src={profilePhoto}
+                    alt="Aditya Yadav - BBA Student, Allenhouse Business School"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-105"
+                    onError={(e) => {
+                      // Fallback to public profile if needed
+                      (e.target as HTMLImageElement).src = `${import.meta.env.BASE_URL}profile.jpg`;
+                    }}
+                  />
 
-                {/* Central Initials Emblem */}
-                <div className="relative z-10 flex flex-col items-center text-center">
-                  <div className="w-28 h-28 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-850 to-slate-900 border border-sky-500/30 shadow-xl shadow-sky-500/10 flex items-center justify-center relative mb-5 group">
-                    <div className="absolute inset-0 rounded-3xl bg-sky-400/10 blur-md" />
-                    <span className="relative text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-tr from-sky-400 via-sky-200 to-indigo-300 font-sans tracking-tight">
-                      AY
-                    </span>
+                  {/* Gradient Scrim for Contrast */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-90" />
+
+                  {/* Bottom Nameplate Overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-5 z-10 flex flex-col">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                      <span className="text-[11px] font-semibold text-emerald-300 tracking-wider uppercase">
+                        Available for Internships
+                      </span>
+                    </div>
+
+                    <h2 className="text-2xl font-extrabold text-white tracking-tight">
+                      Aditya Yadav
+                    </h2>
+                    <p className="text-xs text-sky-400 font-medium">
+                      BBA Student · Allenhouse Business School
+                    </p>
+                    <p className="text-[11px] text-slate-400 mt-0.5">
+                      Kanpur, Uttar Pradesh, India
+                    </p>
                   </div>
-
-                  <h2 className="text-xl font-bold text-white tracking-tight">
-                    Aditya Yadav
-                  </h2>
-                  <p className="text-xs text-sky-400 font-medium tracking-wide mt-1">
-                    Allenhouse Business School
-                  </p>
-                  <p className="text-xs text-slate-400 mt-1">
-                    BBA 2025 – 2028 · Kanpur, UP
-                  </p>
                 </div>
 
                 {/* Floating focus cards (Business, Marketing, Finance, Analytics) */}
-                <div className="absolute -top-3 left-4 bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2 flex items-center gap-2 shadow-lg backdrop-blur-md">
-                  <Briefcase className="w-4 h-4 text-sky-400 shrink-0" />
-                  <span className="text-xs font-semibold text-slate-200">Business Management</span>
+                <div className="absolute -top-3 -left-3 bg-slate-900/95 border border-slate-700/80 rounded-xl px-3 py-2 flex items-center gap-2 shadow-xl backdrop-blur-md z-20">
+                  <Briefcase className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                  <span className="text-xs font-semibold text-slate-200">Business Mgmt</span>
                 </div>
 
-                <div className="absolute top-1/4 -right-3 bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2 flex items-center gap-2 shadow-lg backdrop-blur-md">
-                  <TrendingUp className="w-4 h-4 text-indigo-400 shrink-0" />
-                  <span className="text-xs font-semibold text-slate-200">Digital Marketing</span>
+                <div className="absolute top-12 -right-3 bg-slate-900/95 border border-slate-700/80 rounded-xl px-3 py-2 flex items-center gap-2 shadow-xl backdrop-blur-md z-20">
+                  <TrendingUp className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+                  <span className="text-xs font-semibold text-slate-200">Digital Mktg</span>
                 </div>
 
-                <div className="absolute bottom-16 -left-3 bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2 flex items-center gap-2 shadow-lg backdrop-blur-md">
-                  <FileSpreadsheet className="w-4 h-4 text-emerald-400 shrink-0" />
+                <div className="absolute top-1/2 -left-3 bg-slate-900/95 border border-slate-700/80 rounded-xl px-3 py-2 flex items-center gap-2 shadow-xl backdrop-blur-md z-20">
+                  <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                   <span className="text-xs font-semibold text-slate-200">Finance & Tally</span>
                 </div>
 
-                <div className="absolute -bottom-3 right-6 bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-2 flex items-center gap-2 shadow-lg backdrop-blur-md">
-                  <Target className="w-4 h-4 text-amber-400 shrink-0" />
-                  <span className="text-xs font-semibold text-slate-200">Data & Operations</span>
+                <div className="absolute top-2/3 -right-3 bg-slate-900/95 border border-slate-700/80 rounded-xl px-3 py-2 flex items-center gap-2 shadow-xl backdrop-blur-md z-20">
+                  <Target className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                  <span className="text-xs font-semibold text-slate-200">Operations</span>
                 </div>
 
               </div>
